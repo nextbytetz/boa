@@ -13,9 +13,9 @@ class AddSlugColumnToCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function (Blueprint $table) {
+        /* Schema::table('courses', function (Blueprint $table) {
             $table->text('slug');
-        });
+        });*/
     }
 
     /**
