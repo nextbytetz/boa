@@ -26,6 +26,47 @@
                                         <!-- Table body START -->
                                         <tbody class="border-top-0">
                                         <!-- Table item -->
+                                        @if(!empty($cart['registration']))
+
+                                            @foreach($cart['registration'] as $registration_in_cart)
+
+                                                <tr>
+                                                    <!-- Course item -->
+                                                    <td>
+                                                        <div class="d-lg-flex align-items-center">
+                                                            <!-- Image -->
+                                                            <div>                                                               
+                                                                    <img src="{{PUBLIC_DIR}}/img/logo.jpg" class="avatar avatar-xxl me-3" alt="product image">
+                                                      
+                                                                    {{-- <img src="{{PUBLIC_DIR}}/img/logo.jpg" style="width:500px;height:300px;"> --}}
+                                                            </div>
+
+                                                            <!-- Title -->
+                                                            <h6 class="mb-0 ms-lg-3 mt-2 mt-lg-0">
+                                                                {{-- <a href="/view-ebook?id={{$registration_in_cart->id}}">{{$registration_in_cart->name}}</a> --}}
+                                                                {{$registration_in_cart->name}}
+                                                            </h6>
+                                                        </div>
+                                                    </td>
+
+                                                    <!-- Amount item -->
+                                                    <td class="text-center">
+                                                        <h5 class="text-info mb-0">
+                                                            @if(!empty($registration_in_cart->price))
+                                                                {{formatCurrency($registration_in_cart->price,getWorkspaceCurrency($super_settings))}}
+
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    <!-- Action item -->
+                                                    {{-- <td>
+                                                        <a href="/remove-item-from-cart/{{$ebook_in_cart->id}}" class="btn btn-md bg-pink-light text-danger px-2 mb-0"><i class="fas fa-fw fa-times"></i></a>
+                                                    </td> --}}
+                                                </tr>
+
+                                            @endforeach
+
+                                        @endif
 
                                         @if(!empty($cart['course']))
 
@@ -141,7 +182,21 @@
                                 <!-- Price and detail -->
                                 <ul class="list-group list-group-borderless mb-2">
 
+                                    @if(!empty($cart['registration']))
 
+                                    @foreach($cart['registration'] as $registration_in_cart)
+                                        <li class="list-group-item px-0 d-flex justify-content-between">
+                                            <span class="h6 fw-light mb-0">{{$registration_in_cart->name}}</span>
+                                            <span class="h6 fw-light mb-0 fw-bold">@if(!empty($registration_in_cart->price))
+                                                    {{formatCurrency($registration_in_cart->price,getWorkspaceCurrency($super_settings))}}
+
+                                                @endif
+                                            </span>
+                                        </li>
+
+                                    @endforeach
+
+                                     @endif
 
                                         @if(!empty($cart['course']))
 

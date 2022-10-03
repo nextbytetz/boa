@@ -160,7 +160,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-6 align-self-center">
+                                            {{-- <div class="col-md-6 align-self-center">
                                                 <div class="">
                                                     <label for="timezone">{{__('Timezone')}}</label>
                                                     <select class="form-control" id="timezone" name="timezone">
@@ -173,7 +173,7 @@
                                                     </select>
                                                 </div>
 
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                         <div class="col-12 mt-3">
@@ -282,7 +282,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row mt-3">
+                                        {{-- <div class="row mt-3">
                                             <div class="col-12 col-sm-6">
                                                 <label>{{__('City')}}</label>
                                                 <input class=" form-control" type="text" name="city" value="{{$student->city?? old('city') ?? ''}}" />
@@ -312,7 +312,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                     </div>
 

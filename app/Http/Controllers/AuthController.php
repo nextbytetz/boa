@@ -8,6 +8,8 @@ use App\Models\Setting;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\Workspace;
+use App\Models\Region;
+use App\Models\District;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +18,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use App\Services\Notifications\Sms;
 use Illuminate\Support\Facades\View;
+use App\Traits\AddToCart;
 
 class AuthController extends Controller
 {
+    use AddToCart;
     protected $settings;
     protected $super_settings;
 
@@ -37,6 +42,8 @@ class AuthController extends Controller
 
             $this->super_settings = $super_settings;
             View::share("super_settings", $super_settings);
+            $language = $this->student->language ?? "sw";
+            \App::setLocale($language);
             return $next($request);
         });
     }
@@ -48,6 +55,7 @@ class AuthController extends Controller
         }
 
         return \view("auth.login");
+        // return \view("billing.invoice");
     }
 
     public function superAdminlogin()
@@ -82,8 +90,18 @@ class AuthController extends Controller
     }
 
     public function signup()
+
     {
-        return \view("auth.signup");
+
+      $regions = Region::all();
+      $districts = District::all();
+
+        return \view("auth.signup", [
+        
+            "regions" => $regions,
+            "districts" => $districts,
+           
+        ]);
     }
 
     public function forgotPassword()
@@ -257,7 +275,22 @@ class AuthController extends Controller
             $user->last_login = Carbon::now()->toDateTimeString();
             $user->save();
 
-            return redirect()->route("student.dashboard");
+
+
+            if(!$user->registration_paid){
+                $id =1;
+                  
+                $input = new Request([
+                    'type' => 'registration',
+                ]);
+
+                $this->addItemsToCart( $id, $input);
+                return redirect()->route("cart");
+            }
+            else {
+                return redirect()->route("student.dashboard");
+            }
+           
         }
 
         return back()->withErrors([
@@ -308,17 +341,18 @@ class AuthController extends Controller
             "email" => ["required", "email"],
             "first_name" => ["required"],
             "last_name" => ["required"],
-            "password" => ["required"],
+            "password" => ["required"]
+            
         ]);
 
         $check = User::where("email", $request->email)->first();
-
+ 
         if ($check) {
             return back()->withErrors([
-                "email" => "User already exist",
+                "email" => "User with this email already exist",
             ]);
         }
-
+     
         $workspace = new Workspace();
         $workspace->name = $request->first_name . "'s workspace";
         $workspace->save();
@@ -331,7 +365,7 @@ class AuthController extends Controller
 
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-
+      
         $user->email = $request->input("email");
 
         $user->workspace_id = $workspace->id;
@@ -341,6 +375,7 @@ class AuthController extends Controller
         $workspace->owner_id = $user->id;
         $workspace->save();
 
+       
         if (!empty($this->super_settings["smtp_host"])) {
             try {
                 Config::set(
@@ -370,21 +405,39 @@ class AuthController extends Controller
 
     public function studentSignupPost(Request $request)
     {
+
+       // dd($request);
         $request->validate([
             "email" => ["required", "email"],
             "first_name" => ["required"],
             "last_name" => ["required"],
             "password" => ["required"],
+            "phone_number"=>["required"],
+            "region_id"=>["required"]
         ]);
 
-        $check = Student::where("email", $request->email)->first();
 
-        if ($check) {
+
+        $check_mail = Student::where("email", $request->email)->first();
+        $check_phone_number = User::where("phone_number", $request->phone_number)->first();
+        if ($check_mail) {
             return back()->withErrors([
                 "email" => "This Email already exist",
             ]);
         }
+        if ($check_phone_number) {
+            return back()->withErrors([
+                "phone_number" => "User with this phone number already exist",
+            ]);
+        }
+        $check_region_id = $request->input("region_id");
+        if($check_region_id == 0){
+            return back()->withErrors([
+                "region_id" => "Select Region",
+            ]);
+        }
 
+        
         $student = new Student();
 
         $password = Hash::make($request->password);
@@ -393,10 +446,26 @@ class AuthController extends Controller
 
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
-
+        $student->region_id = $request->input("region_id");
+        $student->ward = $request->input("ward");
+        $student->village = $request->input("village");
+        $student->district_id = $request->input("district_id");
+        $student->phone_number = $request->input("phone_number");
         $student->email = $request->input("email");
-
+       
         $student->save();
+
+     
+        $region = Region::find($request->input("region_id"));
+        $year = Carbon::now()->year;
+        $month = Carbon::now()->month;
+        $number = 'BOA/'.$region->hasc.'/'.$month.'/'.$year.'/'.$student->id;
+        $sms = new Sms($student->phone_number,'Assalam Alleykum Warahamatullah Wabarakatuh '.strtoupper($request->first_name).' '.strtoupper($request->last_name).' hongera sana kwa kukamilisha usajili Namba yako ya usajili ni' .$number.'  Namba hii utaitumia katika kutuma majibu ya mtihani wa moduli zako. KARIBU katika chuo chetu cha BAKWATA ONLINE ACADEMY');
+        $response = $sms->send();
+        logger($response); 
+        $student = Student::find($student->id);
+        $student->number = $number;
+        $student->update();
 
         if (!empty($this->super_settings["smtp_host"])) {
             try {
@@ -421,6 +490,8 @@ class AuthController extends Controller
                 Log::error($e->getMessage());
             }
         }
+
+       // return \view("billing.invoice");
 
         return redirect(config("app.url") . "/student/login");
     }

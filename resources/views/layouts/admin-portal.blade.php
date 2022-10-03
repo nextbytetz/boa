@@ -41,7 +41,7 @@
                     <span class="nav-link-text ms-3">{{ __('Dashboard') }}</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'messages') active @endif "
                    href="/messages">
 
@@ -49,7 +49,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                     <span class="nav-link-text ms-3">{{__('Messages')}}</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item mt-4 mb-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs  text-muted font-weight-bolder opacity-6">{{__('Students ')}}  </h6>
             </li>
@@ -81,15 +81,15 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'assignments') active @endif "
                    href="/assignments">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                     <span class="nav-link-text ms-3">{{__('Assignments')}}</span>
                 </a>
-            </li>
-            <li class="nav-item">
+            </li> --}}
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'certificates') active @endif "
                    href="/certificates">
 
@@ -98,10 +98,10 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                     <span class="nav-link-text ms-3">{{__('Certificates')}}</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item mt-4 mb-2">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-muted font-weight-bolder opacity-6">{{__('Courses & Ebooks')}}  </h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-muted font-weight-bolder opacity-6">{{__('Courses')}}  </h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'course-categories') active @endif "
@@ -128,15 +128,15 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'products') active @endif "
                    href="/products">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                     <span class="nav-link-text ms-3">{{__('eBooks')}}</span>
                 </a>
-            </li>
-            <li class="nav-item mt-4 mb-2">
+            </li> --}}
+            {{-- <li class="nav-item mt-4 mb-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-muted font-weight-bolder opacity-6">{{__('Earnings')}}  </h6>
             </li>
 
@@ -148,13 +148,13 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                     <span class="nav-link-text ms-3">{{__('Earnings')}}</span>
                 </a>
-            </li>
+            </li> --}}
 
-
+{{-- 
             <li class="nav-item mt-4 mb-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-muted font-weight-bolder opacity-6">{{__('Productivity')}}  </h6>
-            </li>
-
+            </li> --}}
+{{-- 
             @if(empty($modules) || in_array('documents',$modules))
 
                 <li class="nav-item">
@@ -170,10 +170,10 @@
                         <span class="nav-link-text ms-3">{{__('Documents')}}</span>
                     </a>
                 </li>
-            @endif
+            @endif --}}
 
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'calendar') active @endif" href="/calendar">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -186,12 +186,12 @@
                     </svg>
                     <span class="nav-link-text ms-3">{{__('Calendar')}}</span>
                 </a>
-            </li>
+            </li> --}}
 
-            <li class="nav-item mt-3 mb-2">
+            {{-- <li class="nav-item mt-3 mb-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-muted text-xs opacity-6">{{__('CMS')}}</h6>
-            </li>
-            <li class="nav-item">
+            </li>--}}
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'themes') active @endif "
                    href="/themes">
 
@@ -199,7 +199,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dribbble"><circle cx="12" cy="12" r="10"></circle><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path></svg>
                     <span class="nav-link-text ms-3">{{__('Frontend Themes')}}</span>
                 </a>
-            </li>
+            </li>  --}}
 
             <li class="nav-item ">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'blogs') active @endif " href="/blogs">
@@ -255,7 +255,7 @@
                     <span class="nav-link-text ms-3">{{__('Users')}}</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'payment-gateways') active @endif "
                    href="/payment-gateways">
 
@@ -267,7 +267,7 @@
                     </svg>
                     <span class="nav-link-text ms-3">{{__('Payment Gateways')}}</span>
                 </a>
-            </li>
+            </li> --}}
 
 
             <li class="nav-item mb-4 ">

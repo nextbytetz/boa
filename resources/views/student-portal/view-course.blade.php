@@ -208,7 +208,7 @@
                                                 @endif
                                             </span>
                                         </li>
-                                        <li class="list-group-item px-0 d-flex justify-content-between">
+                                        {{-- <li class="list-group-item px-0 d-flex justify-content-between">
                                             <span class="h6 fw-light mb-0">
 
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter text-info me-2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
@@ -219,9 +219,9 @@
                                                     {{$course->level}}
                                                 @endif
                                             </span>
-                                        </li>
+                                        </li> --}}
 
-                                        <li class="list-group-item px-0 d-flex justify-content-between">
+                                        {{-- <li class="list-group-item px-0 d-flex justify-content-between">
                                             <span class="h6 fw-light mb-0">
 
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar text-info me-2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -233,8 +233,8 @@
                                                 @endif
 
                                             </span>
-                                        </li>
-                                        <li class="list-group-item px-0 d-flex justify-content-between">
+                                        </li> --}}
+                                        {{-- <li class="list-group-item px-0 d-flex justify-content-between">
                                             <span class="h6 fw-light mb-0">
 
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award text-info me-2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
@@ -245,7 +245,7 @@
 
                                                 @endif
                                             </span>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                     <!-- Divider -->
                                     <hr>

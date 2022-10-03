@@ -189,7 +189,7 @@
                 <div class="col-12">
                     <div class="text-start ">
                         <p class="my-4 ms-3 text-sm">
-                            All rights reserved. Copyright © <script>
+                            All rights reserved. Copyright © Bakwata Online Academy <script>
                                 document.write(new Date().getFullYear())
                             </script>  by @if (!empty($contact))
                                 {{$contact->title}}

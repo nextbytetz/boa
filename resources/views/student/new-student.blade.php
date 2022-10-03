@@ -165,7 +165,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-md-6 align-self-center">
+                                            {{-- <div class="col-md-6 align-self-center">
                                                 <div class="">
                                                     <label for="timezone">{{__('Timezone')}}</label>
                                                     <select class="form-control" id="timezone" name="timezone">
@@ -178,7 +178,7 @@
                                                     </select>
                                                 </div>
 
-                                            </div>
+                                            </div> --}}
                                         </div>
 
                                         <div class="col-12 mt-3">
@@ -277,7 +277,7 @@
                                                 <input class="multisteps-form__input form-control" value="{{$student->address?? old('address') ?? ''}}"  type="text" name="address" />
                                             </div>
                                         </div>
-
+{{-- 
                                         <div class="row mt-3">
                                             <div class="col-12 col-sm-6">
                                                 <label>{{__('City')}}</label>
@@ -308,7 +308,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                     </div>
 

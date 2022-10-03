@@ -39,7 +39,7 @@
             <li class="nav-item">
                 <a class="nav-link @if(($selected_nav ?? '') === 'student-course') active @endif fw-bolder" href="">{{__('Courses')}}</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="/student-assignments?id={{$student->id}}" class="nav-link fw-bolder">{{__('Assignments')}}</a>
             </li>
             <li class="nav-item">
@@ -47,7 +47,7 @@
             </li>
             <li class="nav-item">
                 <a href="/student-ebooks?id={{$student->id}}" class="nav-link fw-bolder">{{__('eBooks')}}</a>
-            </li>
+            </li> --}}
 
         </ul>
         <hr>

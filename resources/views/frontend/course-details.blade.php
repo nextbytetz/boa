@@ -13,11 +13,11 @@
                     </h2>
 
                     <!-- Content -->
-                    <ul class="list-inline mb-0">
+                    {{-- <ul class="list-inline mb-0">
 
                         <li class="list-inline-item text-success fw-bold h6  mb-1 mb-sm-0">{{__('Last updated')}} {{$course->updated_at}}</li>
 
-                    </ul>
+                    </ul> --}}
                     <div class="row mb-4 mt-3">
                         <div class="col-auto">
                             <span class="h6 text-white">{{$rating_out_of_five}}/5</span>
@@ -61,10 +61,10 @@
 
                         </div>
 
-                        <div class="col-auto">
+                        {{-- <div class="col-auto">
                             <span class="h6 text-white">{{$total_reviews}}</span>
                             <span>{{__('Reviews')}}</span>
-                        </div>
+                        </div> --}}
 
 
                     </div>
@@ -93,7 +93,7 @@
                             <img src="{{PUBLIC_DIR}}/img/placeholder.jpeg"
                                  class="w-100 border-radius-md ">
                         @else
-                            <img src="{{PUBLIC_DIR}}/uploads/{{$course->image}}" class="w-100  border-radius-md ">
+                            <img src="{{PUBLIC_DIR}}/uploads/{{$course->image}}" class="w-100  border-radius-md " width="500" height="500">
                         @endif
                     </div>
 
@@ -242,7 +242,7 @@
                                         @endif
                                         </span>
                                 </li>
-                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                {{-- <li class="list-group-item px-0 d-flex justify-content-between">
                                             <span class="h6 fw-light mb-0">
 
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock text-info me-2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
@@ -254,8 +254,8 @@
 
                                         @endif
                                             </span>
-                                </li>
-                                <li class=" list-group-item px-0 d-flex justify-content-between">
+                                </li> --}}
+                                {{-- <li class=" list-group-item px-0 d-flex justify-content-between">
                                             <span class="h6 fw-light mb-0">
 
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter text-info me-2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
@@ -266,7 +266,7 @@
                                             {{$course->level}}
                                         @endif
                                             </span>
-                                </li>
+                                </li> --}}
 
                                 <li class=" list-group-item px-0 d-flex justify-content-between">
                                             <span class="h6 fw-light mb-0">
@@ -281,7 +281,7 @@
 
                                             </span>
                                 </li>
-                                <li class="list-group-item px-0 d-flex justify-content-between">
+                                {{-- <li class="list-group-item px-0 d-flex justify-content-between">
                                             <span class="h6 fw-light mb-0">
 
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award text-info me-2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
@@ -292,7 +292,7 @@
 
                                         @endif
                                             </span>
-                                </li>
+                                </li> --}}
                             </ul>
                             <!-- Divider -->
                             <hr>
@@ -312,7 +312,7 @@
 
                                 </div>
 
-                                <div class="ms-sm-3 mt-2 mt-sm-0 fw-bolder">
+                                <div class="ms-sm-3  mt-sm-0 fw-bolder">
                                    {{__('By')}} {{$users[$course->admin_id]->first_name}} {{$users[$course->admin_id]->last_name}}
 
                                 </div>

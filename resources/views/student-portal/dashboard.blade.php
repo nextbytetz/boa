@@ -10,7 +10,7 @@
                             @endif>
                         <span class="mask bg-dark-alt"></span>
                         <div class="card-body position-relative z-index-1 h-100 ">
-                            <h4 class="text-white font-weight-bolder mb-3 mt-3">  Hi, {{$student->first_name}} {{$student->last_name}}, {{__('Happy Learning!')}}</h4>
+                            <h4 class="text-white font-weight-bolder mb-3 mt-3">  Hi, {{$student->first_name}} {{$student->last_name}}</h4>
 
                             <div class="text-end mb-2">
                                 <a href="/student/my-courses" class="btn btn-round btn-outline-white mb-2" href="javascript:;">
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="row mt-4">
+            {{-- <div class="row mt-4">
 
                 <div class="card mb-4">
                     <div class="card-header pb-0 p-2">
@@ -151,7 +151,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
 

@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="p-3 bg-success  border-radius-2xl d-inline-block rounded-4 shadow-lg position-absolute top-50 end-0 translate-middle-y mt-n7 z-index-1 d-none d-md-block" >
-                                    <p class="text-white">{{__('Secret of my success')}}</p>
+                                    <p class="text-white">{{__('Jiunge leo na wengine')}}</p>
                                     <!-- Avatar group -->
                                     <div class="avatar-group d-flex">
                                         @foreach($students as $stu)
@@ -115,20 +115,20 @@
                                     </div>
                                 </div>
 
-                                <div class="p-3 bg-info border-radius-2xl border-light shadow rounded-4 position-absolute bottom-0 start-0 z-index-9 d-none d-xl-block mb-5 ms-5">
+                                {{-- <div class="p-3 bg-info border-radius-2xl border-light shadow rounded-4 position-absolute bottom-0 start-0 z-index-9 d-none d-xl-block mb-5 ms-5">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <!-- Icon -->
                                         <span class="avatar  bg-info-light rounded-circle mx-auto">
                                             <i class="fas fa-paint-brush text-info text-center"></i>
                                         </span>
                                         <!-- Info -->
-                                        <div class="text-start ms-3">
+                                     <div class="text-start ms-3">
                                             <h6 class="mb-0 text-white">{{__('Congratulations')}} <span class="ms-4"></span></h6>
                                             <p class="mb-0 small text-white">{{__('You are enrolled')}}</p>
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -158,15 +158,15 @@
                                             <img src="{{PUBLIC_DIR}}/img/placeholder.jpeg"
                                                  class="w-100 border-radius-lg move-on-hover shadow mt-3">
                                         @else
-                                            <img src="{{PUBLIC_DIR}}/uploads/{{$course->image}}" class="w-100 border-radius-lg move-on-hover shadow mt-3">
+                                            <img src="{{PUBLIC_DIR}}/uploads/{{$course->image}}" class="w-100 border-radius-lg move-on-hover shadow mt-3"  width="500" height="300">
                                         @endif
 
                                     </a>
                                 </div>
                                 <div class="card-body px-0">
-                                    <h5>
+                                    <h4>
                                         <a href="/course/{{$course->slug}}" class="text-dark font-weight-bold">{{$course->name}}</a>
-                                    </h5>
+                                    </h4>
                                     <div class=" pb-0">
                                         <!-- Badge and favorite -->
                                         <div class="d-flex justify-content-between mb-2">
@@ -211,9 +211,9 @@
 
                                     <div class="name ps-3">
                                         <span>{{$users[$course->admin_id]->first_name}} {{$users[$course->admin_id]->last_name}}</span>
-                                        <div class="stats">
+                                        {{-- <div class="stats">
                                             <small>{{__('Posted ')}}{{$course->updated_at->diffForHumans()}}</small>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                     </span>
@@ -411,7 +411,7 @@
     <section class="py-8 bg-dark-alt position-relative overflow-hidden">
         <img src="../../assets/img/shapes/waves-white.svg" class="position-absolute top-0 d-lg-block d-none opacity-6" alt="">
 
-        <div class="container">
+        {{-- <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8 mx-auto text-center">
                     <h3 class="text-white">{{__('Newly Published eBook') }}</h3>
@@ -445,7 +445,7 @@
 
 
             </div>
-        </div>
+        </div> --}}
         <div class="position-absolute w-100 bottom-0">
             <svg width="100%" viewBox="0 -1 1920 166" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>wave-up</title>

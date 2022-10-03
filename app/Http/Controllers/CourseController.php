@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 class CourseController extends BaseController
 {
+   
     public function courses()
     {
         $courses = Course::all();
@@ -119,13 +120,12 @@ class CourseController extends BaseController
         if (!empty($outcomes)) {
             $course->outcomes = json_encode($outcomes);
         }
-
         $course->name = $request->name;
         $course->price = $request->price;
         $course->slug = $request->slug;
-        $course->level = $request->level;
+        $course->level = 'Beginner';
         $course->status = $request->status;
-        $course->certificate = $request->certificate;
+        $course->certificate = 'Yes';
         $course->deadline = $request->deadline;
         $course->duration = $request->duration;
         $course->admin_id = $this->user->id;

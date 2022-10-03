@@ -28,7 +28,7 @@ class StudentBaseController extends Controller
                 $this->settings[$setting->key] = $setting->value;
             }
             View::share("settings", $this->settings);
-            $language = $this->student->language ?? "en";
+            $language = $this->student->language ?? "sw";
             \App::setLocale($language);
             return $next($request);
         });

@@ -9,20 +9,24 @@ use App\Models\CreditCard;
 use App\Models\Customer;
 use App\Models\EbookPurchase;
 use App\Models\Order;
+use App\Models\Region;
 use App\Models\OrderItem;
 use App\Models\PaymentGateway;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Student;
-
+use App\Models\RegistrationPurchase;
+use App\Traits\AddToCart;
 use App\Models\SubscriptionPlan;
 use App\Models\Workspace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Stripe\Stripe;
+use Illuminate\Support\Facades\Auth;
 
 class BillingController extends WebsiteBaseController
 {
+    use AddToCart;
     //
     public function __construct()
     {
@@ -49,40 +53,43 @@ class BillingController extends WebsiteBaseController
 
     public function checkout()
     {
-        $payment_gateways = PaymentGateway::get()
-            ->keyBy("api_name")
-            ->all();
 
-        if (empty($payment_gateways)) {
-            return response("No payment gateway is configured");
-        }
+if ($this->student) {
 
-        return \view("billing.checkout", [
-            "payment_gateways" => $payment_gateways,
-        ]);
+    $order_id = $this->orderConfirmed();
+    $region = Region::find($this->student->region_id);
+    return \view("billing.invoice", [
+        "first_name" => $this->student->first_name,
+        "last_name" => $this->student->last_name,
+        "phone_number" => $this->student->phone_number,
+        "number" => $this->student->number,
+        "email" => $this->student->email,
+        "region" => $region->name,
+        "order_id" => $order_id,
+    ]);
+}else
+{
+    return redirect('/student/login');
+}
+
+ 
+
+        // $payment_gateways = PaymentGateway::get()
+        //     ->keyBy("api_name")
+        //     ->all();
+
+        // if (empty($payment_gateways)) {
+        //     return response("No payment gateway is configured");
+        // }
+
+        // return \view("billing.checkout", [
+        //     "payment_gateways" => $payment_gateways,
+        // ]);
     }
 
     public function addToCart($id, Request $request)
     {
-        $request->validate([
-            "type" => "required|in:course,ebook",
-        ]);
-
-        $cart = session()->get("cart");
-        if (!$cart) {
-            $cart = [];
-        }
-
-        if ($request->query("type") == "course") {
-            $course = Course::find($id);
-            $cart["course"][$id] = $course;
-            session()->put("cart", $cart);
-        } else {
-            $ebook = Product::find($id);
-            $cart["ebook"][$id] = $ebook;
-            session()->put("cart", $cart);
-        }
-
+        $this->addItemsToCart($id,$request);
         return redirect()->route("cart");
     }
 
@@ -101,15 +108,107 @@ class BillingController extends WebsiteBaseController
         return redirect()->route("cart");
     }
 
+    public function processPayment(Request $request){
+
+       
+
+
+        $nextpay_url = "http://18.220.121.223:30001/gateway/services/v1/collect/push";
+
+       $invoice = $_POST['invoice'];
+       $phone = $_POST['phone_number'];
+       $amount = $_POST['amount'];
+   
+    
+        if (!preg_match("/^(255|0)\\d{9}$/", $phone)) {
+            throw new \Exception("Phone number not correct, sample input 255654001001 | 0654001001");
+        }
+        if (substr($phone, 0, 1) == '0') {
+            $phone = substr_replace($phone, "255", 0, 1);
+        }
+    
+        $body = [
+            "request" => [
+                "command" => "UssdPush",
+                "transactionNumber" => $invoice,
+                "msisdn" => $phone,
+                "amount" => $amount,
+            ],
+        ];
+    
+        $username = "9";
+        $password = "Bakwata@2022";
+        $timestamp = date("YmdHis");
+    
+        $apipassword = base64_encode(hash('sha256', $username . $password . $timestamp, true));
+        $request = [
+            "body" => $body,
+            "header" => [
+                "username" => $username,
+                "password" => $apipassword,
+                "timestamp" => $timestamp,
+            ],
+        ];
+    
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $nextpay_url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($request),
+            CURLOPT_HTTPHEADER => array(
+                "accept: application/json",
+                "content-type: application/json"
+            ),
+        ));
+    
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+    
+        curl_close($curl);
+    
+        if ($err) {
+            $return = "cURL Error #:" . $err;
+            $status = $return;
+        } else {
+            $return = $response;
+            $data = json_decode($return, true);
+            $reference = $data["body"]["response"]["reference"] ?? "";
+            $status = $data["body"]["response"]["responseStatus"] ?? "";
+        }
+  
+  
+    header('Content-type: application/json');
+    
+    $success = true;
+    $error = false;
+    echo json_encode([
+        'success' => $success, 
+        'error' => $error,
+        'status' => $status,
+        'reference' => $reference,
+        //'request' => $request,
+        //'return' => $return,
+        'response_data' => $data,
+        'message' => '', 
+        'response' => '',
+    ]);
+
+    }
+
     public function orderConfirmed()
     {
-        $payment_gateways = PaymentGateway::get()
-            ->keyBy("api_name")
-            ->all();
+        // $payment_gateways = PaymentGateway::get()
+        //     ->keyBy("api_name")
+        //     ->all();
 
-        if (empty($payment_gateways)) {
-            return response("No payment gateway is configured");
-        }
+        // if (empty($payment_gateways)) {
+        //     return response("No payment gateway is configured");
+        // }
 
         $cart = $this->cart;
 
@@ -149,14 +248,28 @@ class BillingController extends WebsiteBaseController
                 $order_item->save();
             }
         }
+        if (!empty($cart["registration"])) {
+            foreach ($cart["registration"] as $registration) {
+                $order_item = new OrderItem();
+                $order_item->order_id = $order->id;
 
-        session()->forget("cart");
+                $order_item->type = "registration";
+                $order_item->item_id = $registration["id"];
+                $order_item->item_name = $registration["name"];
 
-        return \view("billing.order", [
-            "payment_gateways" => $payment_gateways,
-            "order" => $order,
-            "order_item" => $order_item,
-        ]);
+                $order_item->price = $registration["price"];
+                $order_item->save();
+            }
+        }
+
+     //session()->forget("cart");
+
+     return $order->id;
+        // return \view("billing.order", [
+        //     "payment_gateways" => $payment_gateways,
+        //     "order" => $order,
+        //     "order_item" => $order_item,
+        // ]);
     }
 
     public function orders()
@@ -261,6 +374,78 @@ class BillingController extends WebsiteBaseController
                         $ebook_purchased->save();
                     }
                 }
+
+                return redirect("/student/dashboard")->with(
+                    "status",
+                    __("Payment successful")
+                );
+            } catch (\Exception $e) {
+                return response(
+                    [
+                        "success" => false,
+                        "errors" => [
+                            "system" =>
+                                "An error occurred! " . $e->getMessage(),
+                        ],
+                    ],
+                    422
+                );
+            }
+        }
+
+        return redirect()->route("cart");
+    }
+    public function orderPaid()
+    {
+  
+        $amount = getCartTotalPrice();
+
+        if ($amount > 0) {
+            try {
+                // Set your secret key: remember to change this to your live secret key in production
+                // See your keys here: https://dashboard.stripe.com/account/apikeys
+  
+
+                // Create a Customer:
+               
+        
+                // Add courses to student
+
+                $cart = $this->cart;
+                if (!empty($cart["course"])) {
+                    foreach ($cart["course"] as $course) {
+                        $course_purchased = new CoursePurchase();
+                        $course_purchased->course_id = $course->id;
+                        $course_purchased->student_id = $this->student->id;
+                        $course_purchased->save();
+                    }
+                }
+
+                // Add ebooks to student
+
+                // if (!empty($cart["ebook"])) {
+                //     foreach ($cart["ebook"] as $ebook) {
+                //         $ebook_purchased = new EbookPurchase();
+                //         $ebook_purchased->ebook_id = $ebook->id;
+                //         $ebook_purchased->student_id = $this->student->id;
+                //         $ebook_purchased->save();
+                //     }
+                // }
+                
+                if (!empty($cart["registration"])) {
+                    foreach ($cart["registration"] as $registration) {
+                        $registration_purchased = new RegistrationPurchase();
+                        $registration_purchased->registration_id = $registration->id;
+                        $registration_purchased->student_id = $this->student->id;
+                        $registration_purchased->save();
+                    }
+
+                    $student = Student::find($this->student->id);
+                    $student->registration_paid = 1;
+                    $student->update();
+
+                }
+
 
                 return redirect("/student/dashboard")->with(
                     "status",

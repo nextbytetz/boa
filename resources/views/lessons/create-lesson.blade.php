@@ -71,7 +71,7 @@
                 <div class="col-lg-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h5 class="font-weight-bolder">{{__('Upload Video')}}</h5>
+                            {{-- <h5 class="font-weight-bolder">{{__('Upload Video')}}</h5>
                             <div class="row">
                                 <div class="col-12">
 
@@ -84,15 +84,15 @@
                                         </iframe>
 
                                     @endif
-                                </div>
+                                </div> --}}
 
 
-                                <div class="align-self-center">
+                                {{-- <div class="align-self-center">
                                     <div>
                                         <label for="cover_photo" class="form-label mt-3">{{__('Upload Video')}}</label>
                                         <input class="form-control" name="video" type="file" >
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="mb-3 mt-3">
                                     <label for="formFileMultiple" class="form-label">{{__('Attach file')}}</label>

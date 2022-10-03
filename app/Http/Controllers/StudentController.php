@@ -7,6 +7,7 @@ use App\Models\AssignmentSubmission;
 use App\Models\CertificateReceive;
 use App\Models\CertificateTemplate;
 use App\Models\Course;
+use App\Models\Region;
 use App\Models\CoursePurchase;
 use App\Models\EbookPurchase;
 use App\Models\Product;

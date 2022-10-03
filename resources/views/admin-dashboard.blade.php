@@ -5,8 +5,8 @@
     <div class="row mb-2">
         <div class="col">
             <h5 class="fw-bolder">
-                {{__('Dashboard')}} /<span class="text-secondary">
-                            {{__('Overview of your business')}}
+                {{__('Bakwata Online Academy Dashboard')}} <span class="text-secondary">
+                         
                     </span>
             </h5>
             <p class="text-muted">{{__('The dashboard contains the important data to get a overview.')}}</p>
@@ -26,9 +26,9 @@
                         <li><a class="dropdown-item border-radius-md fw-bolder"
                                href="/create-course">{{__('Add Course')}}</a>
                         </li>
-                        <li><a class="dropdown-item border-radius-md fw-bolder"
+                        {{-- <li><a class="dropdown-item border-radius-md fw-bolder"
                                href="/add-product">{{__('Add eBook')}}</a>
-                        </li>
+                        </li> --}}
 
                     </ul>
                 </div>
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 mb-4">
+        {{-- <div class="col-md-3 mb-4">
             <div class="card">
                 <div class="card-body p-3">
                     <div class="row">
@@ -149,7 +149,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
@@ -436,7 +436,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0 p-3">
+                {{-- <div class="card-header pb-0 p-3">
 
                     <div class="d-flex justify-content-between">
 
@@ -446,7 +446,7 @@
                         </a>
                     </div>
 
-                </div>
+                </div> --}}
 
 
                 <div class="card-body p-3">

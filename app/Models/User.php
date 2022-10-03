@@ -39,5 +39,6 @@ class User extends Authenticatable
         "it" => "Italian",
         "ro" => "Romanian",
         "fr" => "French",
+        "sw" => "Swahili",
     ];
 }

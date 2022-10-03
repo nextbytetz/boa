@@ -61,12 +61,12 @@
 
                     </a>
                 </li>
-                <li class="nav-item   ms-lg-auto mx-2">
+                {{-- <li class="nav-item   ms-lg-auto mx-2">
                     <a class=" fw-bolder ps-2 d-flex justify-content-between cursor-pointer align-items-center me-2" href="/shop" >
                         {{__('Shop')}}
 
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item   ms-lg-auto mx-2">
                     <a class=" fw-bolder ps-2 d-flex justify-content-between cursor-pointer align-items-center me-2" href="/blog">
                         {{__('Blog')}}
@@ -165,11 +165,11 @@
                                 {{__('Courses')}}
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="/shop" target="_blank">
                                 {{__('shop')}}
                             </a>
-                        </li>
+                        </li> --}}
 
 
 

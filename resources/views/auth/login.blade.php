@@ -29,7 +29,7 @@
 
                         <a class="navbar-brand text-dark bg-transparent fw-bolder" href="/home" rel="tooltip" title="" data-placement="bottom" target="_blank">
                             @if(!empty($super_settings['logo']))
-                                <img src="{{PUBLIC_DIR}}/uploads/{{$super_settings['logo']}}" class="navbar-brand-img h-100" style="max-height: {{$super_settings['frontend_logo_max_height'] ?? '30'}}px;" alt="...">
+                                <img src="{{PUBLIC_DIR}}/uploads/{{$super_settings['logo']}}" class="navbar-brand-img h-100" style="max-height: {{$super_settings['frontend_logo_max_height'] ?? '290'}}px;" alt="...">
                             @else
                                 <h1 class=" text-white fw-bolder">{{config('app.name')}}</h1>
                             @endif

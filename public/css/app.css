@@ -14434,7 +14434,7 @@ fieldset:disabled .btn {
 
 .btn-info {
     color: #fff;
-    background-color: #6366F1;
+    background-color: #039a00;
 
 }
 .btn-blue {
@@ -14443,8 +14443,8 @@ fieldset:disabled .btn {
 
 }
 .btn-dark-blue {
-    color: #fff;
-    background-color: #3629B6;
+    color: black;
+    background-color: #4CAF50;
 
 }
 .btn-indigo{
@@ -19675,10 +19675,10 @@ fieldset:disabled .btn {
 }
 
 .text-purple {
-    color: #4F55DA !important;
+    color: #039a00 !important;
 }
 .text-light-purple {
-    color: #706892 !important;
+    color: #039a00 !important;
 }
 
 .text-warning {
@@ -19738,7 +19738,7 @@ fieldset:disabled .btn {
 }
 
 .bg-purple-light {
-    background-color: #E2E5FD !important;
+    background-color: #d3ffd2 !important;
 }
 
 .bg-secondary {
@@ -19805,7 +19805,7 @@ fieldset:disabled .btn {
 }
 
 .bg-dark-alt {
-    background-color: #2B294B !important;
+    background-color: #049901 !important;
 }
 
 
@@ -24399,7 +24399,7 @@ fieldset:disabled .btn {
 
 .btn-info:hover,
 .btn.bg-gradient-info:hover {
-    background-color: #4F55DA;
+    background-color: #07ad04;
     border-color: #4F55DA;
 }
 
@@ -25227,6 +25227,7 @@ fieldset:disabled .btn {
     align-items: center;
     background-size: cover;
     background-position: 50%;
+    
 }
 
 .page-header .container {
@@ -31891,11 +31892,11 @@ p {
     }
 
     .navbar-vertical.navbar-expand-md .navbar-nav > .nav-item > .nav-link .icon svg .color-background {
-        fill: #3A416F;
+        fill: #039a00;
     }
 
     .navbar-vertical.navbar-expand-md .navbar-nav > .nav-item > .nav-link .icon svg .color-foreground {
-        fill: #141727;
+        fill: #039a00;
     }
 
     .navbar-vertical.navbar-expand-md .lavalamp-object {
@@ -31991,11 +31992,11 @@ p {
     }
 
     .navbar-vertical.navbar-expand-lg .navbar-nav > .nav-item > .nav-link .icon svg .color-background {
-        fill: #3A416F;
+        fill: #039a00;
     }
 
     .navbar-vertical.navbar-expand-lg .navbar-nav > .nav-item > .nav-link .icon svg .color-foreground {
-        fill: #141727;
+        fill: #039a00;
     }
 
     .navbar-vertical.navbar-expand-lg .lavalamp-object {
@@ -32091,11 +32092,11 @@ p {
     }
 
     .navbar-vertical.navbar-expand-xl .navbar-nav > .nav-item > .nav-link .icon svg .color-background {
-        fill: #3A416F;
+        fill: #039a00;
     }
 
     .navbar-vertical.navbar-expand-xl .navbar-nav > .nav-item > .nav-link .icon svg .color-foreground {
-        fill: #141727;
+        fill: #039a00;
     }
 
     .navbar-vertical.navbar-expand-xl .lavalamp-object {
@@ -32191,11 +32192,11 @@ p {
     }
 
     .navbar-vertical.navbar-expand-xxl .navbar-nav > .nav-item > .nav-link .icon svg .color-background {
-        fill: #3A416F;
+        fill: #039a00;
     }
 
     .navbar-vertical.navbar-expand-xxl .navbar-nav > .nav-item > .nav-link .icon svg .color-foreground {
-        fill: #141727;
+        fill: #039a00;
     }
 
     .navbar-vertical.navbar-expand-xxl .lavalamp-object {
@@ -32612,7 +32613,7 @@ p {
 
 .navbar-vertical .navbar-nav > .nav-item .nav-link.active {
     color: #fff;
-    background-color: #6366f1;
+    background-color: #039a00;
 }
 
 .navbar .navbar-brand {

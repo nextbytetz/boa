@@ -38,6 +38,8 @@ class FrontendController extends WebsiteBaseController
 
             $this->super_settings = $super_settings;
             View::share("super_settings", $super_settings);
+            $language = $this->student->language ?? "sw";
+            \App::setLocale($language);
             return $next($request);
         });
     }
@@ -51,7 +53,7 @@ class FrontendController extends WebsiteBaseController
             ->all();
 
         $courses = Course::orderBy("id", "desc")
-            ->limit(4)
+            ->limit(5)
             ->get();
         $blogs = Blog::orderBy("id", "desc")
             ->limit(3)

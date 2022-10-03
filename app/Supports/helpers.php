@@ -122,5 +122,10 @@ function getCartTotalPrice()
             $total += $value->price;
         }
     }
+    if (!empty($cart["registration"])) {
+        foreach ($cart["registration"] as $value) {
+            $total += $value->price;
+        }
+    }
     return $total;
 }

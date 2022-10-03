@@ -37,7 +37,7 @@
                                                     <img src="{{PUBLIC_DIR}}/img/placeholder.png"
                                                          class="w-100 border-radius-lg shadow-sm ">
                                                 @else
-                                                    <img src="{{PUBLIC_DIR}}/uploads/{{$course->image}}" class="w-100  card-img-top shadow-sm ">
+                                                    <img src="{{PUBLIC_DIR}}/uploads/{{$course->image}}" class="w-100  card-img-top shadow-sm "  width="400" height="200">
                                             @endif
                                             <!-- Card body -->
                                                 <div class="card-body pb-0">

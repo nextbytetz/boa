@@ -91,6 +91,8 @@ Route::get("/remove-item-from-cart/{id}", [
     BillingController::class,
     "removeItemFromCart",
 ]);
+Route::post("/process-payment", [BillingController::class, "processPayment"]);
+Route::get("/order-paid", [BillingController::class, "orderPaid"]);
 
 Route::get("/course", [FrontendController::class, "courses"]);
 
@@ -262,10 +264,7 @@ Route::post("/user-change-password", [
 Route::post("/login", [AuthController::class, "loginPost"]);
 Route::post("/admin/login", [AuthController::class, "superAdminLoginPost"]);
 Route::post("/signup", [AuthController::class, "signupPost"]);
-Route::post("/student-signup-post", [
-    AuthController::class,
-    "studentSignupPost",
-]);
+Route::post("/student-signup-post", [AuthController::class,"studentSignupPost",]);
 Route::post("/save-note", [ActionsController::class, "notePost"]);
 
 Route::post("/document", [DocumentController::class, "documentPost"]);

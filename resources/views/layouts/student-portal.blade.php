@@ -84,26 +84,46 @@
             <li class="nav-item ">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'student-course') active @endif " href="/student/my-courses">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                    <span class="nav-link-text  ms-3">{{__('Courses')}}</span>
+                    <span class="nav-link-text  ms-3">{{__('My Courses')}}</span>
                 </a>
             </li>
 
+            <li class="nav-item mt-3 mb-2">
+                <h6 class="ps-4 ms-2 text-uppercase text-muted text-xs opacity-6">{{__('Chagua Kozi')}}  </h6>
+            </li>
+    <div class="sidenav-footer mx-3 mb-3 ">
+        <div class="card shadow-none bg-dark-alt" id="sidenavCard">
 
-            <li class="nav-item ">
+            <div class="card-body  text-start p-3 w-100">
+                <div class="icon icon-shape icon-sm bg-purple-light shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>
+                </div>
+                <div class="docs-info">                
+
+                    <a href="/course" target="_blank" class="btn btn-info btn-sm w-100 mb-0">{{__('Choose course here')}}</a>
+                    <h6 class="text-white up mb-2">{{__('Pay and start studying')}}</h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+            {{-- <li class="nav-item ">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'ebooks') active @endif " href="/student/ebooks">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                     <span class="nav-link-text  ms-3">{{__('eBooks')}}</span>
                 </a>
-            </li>
-            <li class="nav-item ">
+            </li> --}}
+            {{-- <li class="nav-item ">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'assignments') active @endif " href="/student/assignments">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
 
                     <span class="nav-link-text  ms-3">{{__('Assignments')}}</span>
                 </a>
-            </li>
+            </li> --}}
 
-
+{{-- 
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'student-certificates') active @endif"
                    href="/student/my-certificates">
@@ -111,15 +131,15 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award "><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                     <span class="nav-link-text  ms-3">{{__('Certificates')}}</span>
                 </a>
-            </li>
-            <li class="nav-item">
+            </li> --}}
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'messages') active @endif"
                    href="/student/messages">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                     <span class="nav-link-text  ms-3">{{__('Messages')}}</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item mt-3 mb-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-muted text-xs opacity-6">{{__('Account Settings')}}  </h6>
@@ -162,23 +182,6 @@
         </ul>
     </div>
 
-    <div class="sidenav-footer mx-3 mb-3 ">
-        <div class="card shadow-none bg-dark-alt" id="sidenavCard">
-
-            <div class="card-body  text-start p-3 w-100">
-                <div class="icon icon-shape icon-sm bg-purple-light shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>
-                </div>
-                <div class="docs-info">
-                    <h6 class="text-white up mb-2">{{__('Browse Courses')}}</h6>
-
-                    <a href="/home" target="_blank" class="btn btn-info btn-sm w-100 mb-0">{{__('Go to website')}}</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
 
 </aside>
 

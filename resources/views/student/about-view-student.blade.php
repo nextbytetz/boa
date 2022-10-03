@@ -31,7 +31,7 @@
             <li class="nav-item">
                 <a class="nav-link fw-bolder" href="/student-courses?id={{$student->id}}">{{__('Courses')}}</a>
             </li>
-
+{{-- 
             <li class="nav-item">
                 <a href="/student-assignments?id={{$student->id}}" class="nav-link fw-bolder">{{__('Assignments')}}</a>
             </li>
@@ -40,7 +40,7 @@
             </li>
             <li class="nav-item">
                 <a href="/student-ebooks?id={{$student->id}}" class="nav-link fw-bolder">{{__('eBooks')}}</a>
-            </li>
+            </li> --}}
 
 
         </ul>

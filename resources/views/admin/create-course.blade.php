@@ -50,7 +50,7 @@
 
                         <div class="row mt-3 mb-3">
 
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label class="">{{__('Level')}}</label>
 
                                 <select class="form-control" aria-label="Default select example" name="level">
@@ -61,7 +61,7 @@
                                     <option value="Advanced"
                                             @if(($course->level ?? null) === 'Advanced') selected @endif>{{__('Advanced')}}</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="col-sm-6">
                                 <label class="">{{__('Category')}}<a href="/course-categories" class="text-info-light" >{{__(' New Category')}}&nbsp;</a></label>&nbsp;
                                 <select class="form-control" name="category_id" id="choices-category-edit">
@@ -207,7 +207,7 @@
 
                             </select>
                         </div>
-                        <div class="mt-3">
+                        {{-- <div class="mt-3">
                             <label class="">{{__('Certificate')}}</label>
 
                             <select class="form-control" aria-label="Default select example" name="certificate">
@@ -219,7 +219,7 @@
                                 <option value="Optional"
                                         @if(($course->certificate ?? null) === 'Optional') selected @endif>{{__('Optional')}}</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -309,7 +309,7 @@ class AdminController extends AdminBaseController
 
         $post->save();
 
-        return redirect(config("app.url") . "/landingpage");
+        return redirect(config("app.url") . "landingpage");
     }
 
     public function story2Section(Request $request)
@@ -335,7 +335,7 @@ class AdminController extends AdminBaseController
         $post->story2_paragrapgh = clean($request->story2_paragrapgh);
         $post->save();
 
-        return redirect(config("app.url") . "/landingpage");
+        return redirect(config("app.url") . "landingpage");
     }
     public function testimonialSection(Request $request)
     {
@@ -378,7 +378,7 @@ class AdminController extends AdminBaseController
         $post->testimonial2_paragraph = clean($request->testimonial2_paragraph);
         $post->save();
 
-        return redirect(config("app.url") . "/landingpage");
+        return redirect(config("app.url") . "/andingpage");
     }
     public function calltoactionSection(Request $request)
     {
@@ -394,7 +394,7 @@ class AdminController extends AdminBaseController
 
         $post->save();
 
-        return redirect(config("app.url") . "/landingpage");
+        return redirect(config("app.url") . "landingpage");
     }
 
     public function privacyPage()

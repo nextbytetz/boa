@@ -20,8 +20,9 @@ class Student extends Model
 
     public static $available_languages = [
         "en" => "English",
-        "it" => "Italian",
-        "ro" => "Romanian",
-        "fr" => "French",
+        // "it" => "Italian",
+        // "ro" => "Romanian",
+        // "fr" => "French",
+        "sw" => "Swahili",
     ];
 }
