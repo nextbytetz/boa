@@ -22,14 +22,6 @@ class DatabaseSeeder extends Seeder
   
         $this->call([
             RegionsTableSeeder::class,
-            $this->call(UsersTableSeeder::class),
-            $this->call(StudentsTableSeeder::class),
-            $this->call(CoursesTableSeeder::class),
-            $this->call(CoursePurchasesTableSeeder::class),
-            $this->call(LessonsTableSeeder::class),
-            $this->call(OrdersTableSeeder::class),
-            $this->call(RegistrationsTableSeeder::class),
-            $this->call(RegistrationPurchasesTableSeeder::class),
           
         ]);
         $workspace = new Workspace();
