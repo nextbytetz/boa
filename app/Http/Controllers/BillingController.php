@@ -399,12 +399,46 @@ if ($this->student) {
     }
     public function orderPaid(Request $request)
     {
-  
         logger($request);
-        $amount = getCartTotalPrice();
+    
+        try {
+        $decoded_params = $request->all();
 
-        if ($amount > 0) {
-            try {
+        // $decoded_params['body']['result']['referenceNumber'];
+
+        $order_id = $decoded_params['body']['result']['transactionNumber'];
+
+        $order = Order::find($order_id);
+        $order_items = OrderItem::where("order_id",$order_id)->get();
+        foreach($order_items as $order_item){
+
+                 if($order_item->type == 'course'){
+                    $course_purchased = new CoursePurchase();
+                    $course_purchased->course_id = $order_item->item_id;
+                    $course_purchased->student_id = $order->student_id;
+                    $course_purchased->save();
+
+                 }
+                 
+                 if($order_item->type == 'registration'){
+                    $registration_purchased = new RegistrationPurchase();
+                    $registration_purchased->registration_id = $order_item->item_id;
+                    $registration_purchased->student_id = $order->student_id;
+                    $registration_purchased->save();
+
+                    $student = Student::find($order->student_id);
+                    $student->registration_paid = 1;
+                    $student->update();
+                 }
+
+        } 
+        // $amount = getCartTotalPrice();
+
+ 
+
+
+
+
                 // Set your secret key: remember to change this to your live secret key in production
                 // See your keys here: https://dashboard.stripe.com/account/apikeys
   
@@ -414,15 +448,15 @@ if ($this->student) {
         
                 // Add courses to student
 
-                $cart = $this->cart;
-                if (!empty($cart["course"])) {
-                    foreach ($cart["course"] as $course) {
-                        $course_purchased = new CoursePurchase();
-                        $course_purchased->course_id = $course->id;
-                        $course_purchased->student_id = $this->student->id;
-                        $course_purchased->save();
-                    }
-                }
+                // $cart = $this->cart;
+                // if (!empty($cart["course"])) {
+                //     foreach ($cart["course"] as $course) {
+                //         $course_purchased = new CoursePurchase();
+                //         $course_purchased->course_id = $course->id;
+                //         $course_purchased->student_id = $this->student->id;
+                //         $course_purchased->save();
+                //     }
+                // }
 
                 // Add ebooks to student
 
@@ -435,19 +469,19 @@ if ($this->student) {
                 //     }
                 // }
                 
-                if (!empty($cart["registration"])) {
-                    foreach ($cart["registration"] as $registration) {
-                        $registration_purchased = new RegistrationPurchase();
-                        $registration_purchased->registration_id = $registration->id;
-                        $registration_purchased->student_id = $this->student->id;
-                        $registration_purchased->save();
-                    }
+                // if (!empty($cart["registration"])) {
+                //     foreach ($cart["registration"] as $registration) {
+                //         $registration_purchased = new RegistrationPurchase();
+                //         $registration_purchased->registration_id = $registration->id;
+                //         $registration_purchased->student_id = $this->student->id;
+                //         $registration_purchased->save();
+                //     }
 
-                    $student = Student::find($this->student->id);
-                    $student->registration_paid = 1;
-                    $student->update();
+                //     $student = Student::find($this->student->id);
+                //     $student->registration_paid = 1;
+                //     $student->update();
 
-                }
+                // }
 
 
                 return redirect("/student/dashboard")->with(
@@ -466,7 +500,7 @@ if ($this->student) {
                     422
                 );
             }
-        }
+    
 
         return redirect()->route("cart");
     }
