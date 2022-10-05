@@ -262,7 +262,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js" integrity="sha512-7PPqr8/6AIfaOwdMdOGoKGz81rzjasImI0s8Vlwv6Dtw9TH2/TDkoBLzk1C3q+sI6oNd0JtJKtLqui/NcNphOw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
 			$(function() {
-                $payment_success_url = '';			
+                // $payment_success_url = '';			
                 let $body = $('body');
 				$body.on("click", "a.recheck_status", function ($e) {
 					$e.preventDefault();
@@ -279,7 +279,7 @@
 							if ($data.success) {
 								$("#server_status_msg").html($data.status);
 								if ($data.status === "COMPLETED") {
-									window.location.href = "<?= $payment_success_url ?>";
+									// window.location.href = "<?= $payment_success_url ?>";
 								}
 							} else {
 								$("#server_status_msg").html($data.error);
