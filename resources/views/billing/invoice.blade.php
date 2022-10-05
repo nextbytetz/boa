@@ -261,77 +261,77 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js" integrity="sha512-7PPqr8/6AIfaOwdMdOGoKGz81rzjasImI0s8Vlwv6Dtw9TH2/TDkoBLzk1C3q+sI6oNd0JtJKtLqui/NcNphOw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
-    $(function() {
-        let $body = $('body');
-        $body.on("click", "a.recheck_status", function ($e) {
-            $e.preventDefault();
-            let $href = $(this).attr('href');
-            $.ajax({
-                method: "POST",
-                url: $href,
-                data: { reference: $(".pay_reference").html() },
-                beforeSend: function ($e) {
-                    $body.find('.recheck_status i').removeClass("far fa-caret-square-right").addClass('fa fa-spinner');
-                },
-                success : function ($data) {
-                    /* console.log($data); */
-                    if ($data.success) {
-                        $("#server_status_msg").html($data.status);
-                        if ($data.status === "COMPLETED") {
-                  
-                        }
-                    } else {
-                        $("#server_status_msg").html($data.error);
-                    }
-                }
-            })
-            .done(function( $data ) {
-                $body.find('.recheck_status i').removeClass("fas fa-spinner").addClass('far fa-caret-square-right');
-            });
-        });
-        $body.on('submit', 'form[name=ussd_push]', function ($e) {
-            $e.preventDefault();
-            let $form = $(this);
-            let $options = {
-                dataType : "json",
-                type : "POST",
-                url : $form.attr("action"),
-                beforeSend : function ($e) {
-                    $("#server_msg").html("");
-                    $form.find(".btn-submit").prop('disabled', true);
-                    $form.find('.btn-submit i').removeClass("far fa-caret-square-right").addClass('fa fa-spinner');
-                    $form.find('.pay_title').html("Waiting Payment");
-                },
-                success : function ($data) {
-                    /* console.log($data); */
-                    if ($data.success) {
-                        $(".pay_reference").html($data.reference);
-                        $("#server_msg").html($data.status);
-                    } else {
-                        $("#server_msg").html($data.error);
-                    }
-                    if (!$data.reference) {
-                        $form.find(".btn-submit").prop('disabled', false);
-                        $form.find('.btn-submit i').removeClass("fas fa-spinner").addClass('far fa-caret-square-right');
-                        $form.find('.pay_title').html("Pay");
-                        $form.append('<div class="alert alert-danger general_error" role="alert">' + $data.message + '</div>'); $form.find('.general_error').fadeOut(11000);
-                    }
-                },
-                error: function ($data) {
-                    console.log($data);
-                    $form.find(".btn-submit").prop('disabled', false);
-                    $form.find('.btn-submit i').removeClass("fas fa-spinner").addClass('far fa-caret-square-right');
-                    $form.find('.pay_title').html("Pay");
-                    // let errors = $.parseJSON($data.responseText);
-                    /*console.log(errors);*/
-                    /* $.each(errors.errors, function($index, $value) {
-                        if ($index === 'general_error') { $($form).prepend('<div class="alert alert-danger general_error" role="alert">' + $value + '</div>'); $('.general_error').fadeOut(11000); }
-                    }); */
-                }
-            };
-            $($form).ajaxSubmit($options);
-        });
-    });
+			$(function() {
+				let $body = $('body');
+				$body.on("click", "a.recheck_status", function ($e) {
+					$e.preventDefault();
+					let $href = $(this).attr('href');
+					$.ajax({
+						method: "POST",
+						url: $href,
+						data: { reference: $(".pay_reference").html() },
+						beforeSend: function ($e) {
+							$body.find('.recheck_status i').removeClass("far fa-caret-square-right").addClass('fa fa-spinner');
+						},
+						success : function ($data) {
+							/* console.log($data); */
+							if ($data.success) {
+								$("#server_status_msg").html($data.status);
+								if ($data.status === "COMPLETED") {
+									window.location.href = "<?= $payment_success_url ?>";
+								}
+							} else {
+								$("#server_status_msg").html($data.error);
+							}
+						}
+					})
+					.done(function( $data ) {
+						$body.find('.recheck_status i').removeClass("fas fa-spinner").addClass('far fa-caret-square-right');
+					});
+				});
+				$body.on('submit', 'form[name=ussd_push]', function ($e) {
+					$e.preventDefault();
+					let $form = $(this);
+					let $options = {
+						dataType : "json",
+						type : "POST",
+						url : $form.attr("action"),
+						beforeSend : function ($e) {
+							$("#server_msg").html("");
+							$form.find(".btn-submit").prop('disabled', true);
+							$form.find('.btn-submit i').removeClass("far fa-caret-square-right").addClass('fa fa-spinner');
+							$form.find('.pay_title').html("Waiting Payment");
+						},
+						success : function ($data) {
+							/* console.log($data); */
+							if ($data.success) {
+								$(".pay_reference").html($data.reference);
+								$("#server_msg").html($data.status);
+							} else {
+								$("#server_msg").html($data.error);
+							}
+							if (!$data.reference) {
+								$form.find(".btn-submit").prop('disabled', false);
+								$form.find('.btn-submit i').removeClass("fas fa-spinner").addClass('far fa-caret-square-right');
+								$form.find('.pay_title').html("Pay");
+								$form.append('<div class="alert alert-danger general_error" role="alert">' + $data.message + '</div>'); $form.find('.general_error').fadeOut(11000);
+							}
+						},
+						error: function ($data) {
+							console.log($data);
+							$form.find(".btn-submit").prop('disabled', false);
+							$form.find('.btn-submit i').removeClass("fas fa-spinner").addClass('far fa-caret-square-right');
+							$form.find('.pay_title').html("Pay");
+							// let errors = $.parseJSON($data.responseText);
+							/*console.log(errors);*/
+							/* $.each(errors.errors, function($index, $value) {
+								if ($index === 'general_error') { $($form).prepend('<div class="alert alert-danger general_error" role="alert">' + $value + '</div>'); $('.general_error').fadeOut(11000); }
+							}); */
+						}
+					};
+					$($form).ajaxSubmit($options);
+				});
+			});
 </script>
    
 </html>

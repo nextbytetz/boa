@@ -92,7 +92,7 @@ Route::get("/remove-item-from-cart/{id}", [
     "removeItemFromCart",
 ]);
 Route::post("/process-payment", [BillingController::class, "processPayment"]);
-Route::get("/order-paid", [BillingController::class, "orderPaid"]);
+Route::post("/order-paid", [BillingController::class, "orderPaid"]);
 
 Route::get("/course", [FrontendController::class, "courses"]);
 

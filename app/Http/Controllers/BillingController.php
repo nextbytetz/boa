@@ -110,11 +110,12 @@ if ($this->student) {
 
     public function processPayment(Request $request){
 
-       
-
-
-        $nextpay_url = "http://18.220.121.223:30001/gateway/services/v1/collect/push";
-
+        $error = "";
+        $status = "";
+        $success = true;
+        $reference = "";
+       try {
+       $nextpay_url = "http://18.220.121.223:8980/gateway/services/v1/collect/push";
        $invoice = $_POST['invoice'];
        $phone = $_POST['phone_number'];
        $amount = $_POST['amount'];
@@ -181,11 +182,12 @@ if ($this->student) {
             $status = $data["body"]["response"]["responseStatus"] ?? "";
         }
   
-  
+    } catch (\Exception $e) {
+        $success = false;
+        $error = $e->getMessage();
+    }
     header('Content-type: application/json');
-    
-    $success = true;
-    $error = false;
+
     echo json_encode([
         'success' => $success, 
         'error' => $error,
@@ -395,9 +397,10 @@ if ($this->student) {
 
         return redirect()->route("cart");
     }
-    public function orderPaid()
+    public function orderPaid(Request $request)
     {
   
+        logger($request);
         $amount = getCartTotalPrice();
 
         if ($amount > 0) {
