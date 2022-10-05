@@ -22,6 +22,14 @@ class DatabaseSeeder extends Seeder
   
         $this->call([
             RegionsTableSeeder::class,
+            $this->call(UsersTableSeeder::class),
+            $this->call(StudentsTableSeeder::class),
+            $this->call(CoursesTableSeeder::class),
+            $this->call(CoursePurchasesTableSeeder::class),
+            $this->call(LessonsTableSeeder::class),
+            $this->call(OrdersTableSeeder::class),
+            $this->call(RegistrationsTableSeeder::class),
+            $this->call(RegistrationPurchasesTableSeeder::class),
           
         ]);
         $workspace = new Workspace();
@@ -40,7 +48,7 @@ class DatabaseSeeder extends Seeder
             $user->super_admin = 1;
             $user->save();
 
-            $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         $this->call(StudentsTableSeeder::class);
         $this->call(CoursesTableSeeder::class);
         $this->call(CoursePurchasesTableSeeder::class);
@@ -48,7 +56,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OrdersTableSeeder::class);
         $this->call(RegistrationsTableSeeder::class);
         $this->call(RegistrationPurchasesTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
+        
     }
 
         $data = [
