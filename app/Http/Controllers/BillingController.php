@@ -484,10 +484,17 @@ if ($this->student) {
                 // }
 
 
-                return redirect("/student/dashboard")->with(
+                return response(
+                    [
+                        "success" => true,
+                        "message" => "Payment Confirmed",
+                    ],
+                    200
+                );
+                /* return redirect("/student/dashboard")->with(
                     "status",
                     __("Payment successful")
-                );
+                ); */
             } catch (\Exception $e) {
                 return response(
                     [
@@ -502,6 +509,12 @@ if ($this->student) {
             }
     
 
-        return redirect()->route("cart");
+            return response(
+                [
+                    "success" => false,
+                    "message" => "Payment Not Confirmed",
+                ],
+                200
+            );
     }
 }
