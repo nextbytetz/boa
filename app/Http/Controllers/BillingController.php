@@ -420,6 +420,7 @@ if ($this->student) {
         $order_id = $decoded_params['body']['result']['transactionNumber'];
    
         $order = Order::find($order_id);
+        $student = Student::find($order->student_id); 
         $order_items = OrderItem::where("order_id",$order_id)->get();
         foreach($order_items as $order_item){
 
@@ -428,8 +429,7 @@ if ($this->student) {
                     $course_purchased->course_id = $order_item->item_id;
                     $course_purchased->student_id = $order->student_id;
                     $course_purchased->save();
-                    $phone = '0788330308';
-                    $sms = new Sms($phone, 'Assalam Alleykum Warahamatullah Wabarakatuh. Malipo yamepokelewa risiti namba '.$receipt_number.', kiasi '.$order->order_total.', kozi uliyolipia '.$order_item->item_name.' .Karibu BAKWATA ONLINE ACADEMY');
+                    $sms = new Sms($student->phone_number, 'Assalam Alleykum Warahamatullah Wabarakatuh. Malipo yamepokelewa risiti namba '.$receipt_number.', kiasi '.$order->order_total.', kozi uliyolipia '.$order_item->item_name.' .Karibu BAKWATA ONLINE ACADEMY');
                     $response = $sms->send();
 
                  }
@@ -459,14 +459,13 @@ if ($this->student) {
 
 
          
-$student = Student::find($order->student_id); 
+
 if (is_null($student->number)) {
     $region = Region::find($student->region_id);
     $year = Carbon::now()->year;
     $month = Carbon::now()->month;
     $number = 'BOA/'.$region->hasc.'/'.$month.'/'.$year.'/'.$student->id;
-    $phone = '0788330308';
-    $sms = new Sms($phone, 'Assalam Alleykum Warahamatullah Wabarakatuh '.strtoupper($request->first_name).' '.strtoupper($request->last_name).' Namba yako ya usajili ni ' .$number.'  Namba hii utaitumia katika kutuma majibu ya mtihani wa moduli zako. Karibu BAKWATA ONLINE ACADEMY');
+    $sms = new Sms($student->phone_number, 'Assalam Alleykum Warahamatullah Wabarakatuh '.strtoupper($request->first_name).' '.strtoupper($request->last_name).' Namba yako ya usajili ni ' .$number.'  Namba hii utaitumia katika kutuma majibu ya mtihani wa moduli zako. Karibu BAKWATA ONLINE ACADEMY');
     $response = $sms->send();
     //logger($response);
     $student = Student::find($student->id);
