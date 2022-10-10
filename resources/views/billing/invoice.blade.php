@@ -134,7 +134,7 @@
                            <tr>
                               
                                <td class="text-right"><h2><strong>Total: </strong></h2></td>
-                               <td class="text-left text-danger"><h2><strong><i class="fa fa-inr"></i>   {{formatCurrency(getCartTotalPrice(),getWorkspaceCurrency($super_settings))}}</strong></h2></td>
+                               <td class="text-left text-danger"><h2><strong><i class="fa fa-inr"></i>   {{formatCurrency($order_total,getWorkspaceCurrency($super_settings))}}</strong></h2></td>
                            </tr>
                        </tbody>
                    </table>
@@ -142,13 +142,13 @@
                
            
 
-    <h3><STRONG><span>HOW TO PAY</span></STRONG></h3>
+    <h3><STRONG><span>JINSI YA KUFANYA MALIPO</span></STRONG></h3>
 
     <table class="inventory">
         <thead>
             <tr>
-                <th><span>INITIATE PAYMENT DIRECT TO YOUR PHONE WITH NUMBER</span></th>
-                <th><span>CLICK BELOW BUTTON AFTER PAYMENT COMPLETION</span></th>
+                <th><span>WEKA NAMBA YAKO YA SIMU HAPA CHINI,KISHA BONYEZA KITUFE CHA 'PAY', UJUMBE UTAINGIA KWENYE SIMU YAKO, RUHUSU MALIPO KWA KUWEKA PASSWORD</span></th>
+                {{-- <th><span>CLICK BELOW BUTTON AFTER PAYMENT COMPLETION</span></th> --}}
             </tr>
         </thead>
         <tbody>
@@ -157,7 +157,7 @@
                     <div>
                         <form method="POST" action="/process-payment" accept-charset="UTF-8" name="ussd_push" enctype="multipart/form-data">
                             <input name="invoice"  value="{{$order_id}}" class="form-control" type="hidden">                                      
-                            <input name="amount"  value="{{getCartTotalPrice()}}" class="form-control" type="hidden">
+                            <input name="amount"  value="{{$order_total}}" class="form-control" type="hidden">
                             <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" class="text-input" required>
                             <div style="color:blue;" id="server_msg"></div>                          
                             @csrf
@@ -175,7 +175,7 @@
         </tbody>
     </table>
 
-    <h3><STRONG>OR PAY TO A BUSINESS NUMBER (CHOOSE YOUR NETWORK)</STRONG></h3>
+    <h3><STRONG>AU LIPA KWA BUSINESS NUMBER KWA MTANDAO HUSIKA</STRONG></h3>
     <table class="address" id="c2b_channels">
         <thead>
             <tr>
@@ -196,7 +196,7 @@
                         <li>Choose 5 - Make Payment</li>
                         <li>Choose 4 - Enter business number</li>
                         <li>Enter <b>333443</b></li>
-                        <li>Enter amount <strong> {{formatCurrency(getCartTotalPrice(),getWorkspaceCurrency($super_settings))}}</strong></li>
+                        <li>Enter amount <strong> {{formatCurrency($order_total,getWorkspaceCurrency($super_settings))}}</strong></li>
                         <li>Enter reference number (Pay Number) : <strong class="pay_reference"></strong></li>
                         <li>Enter PIN</li>
                         <li>Confirm Payment</li>
@@ -213,7 +213,7 @@
                         <li>Choose 8 - Enter business number</li>
                         <li>Enter <b>132244</b></li>
                         <li>Enter reference number (Pay Number) : <strong class="pay_reference"></strong></li>
-                        <li>Enter amount <strong> {{formatCurrency(getCartTotalPrice(),getWorkspaceCurrency($super_settings))}} </strong></li>
+                        <li>Enter amount <strong> {{formatCurrency($order_total,getWorkspaceCurrency($super_settings))}} </strong></li>
                         <li>Enter PIN</li>
                         <li>Confirm Payment</li>
                         <li>You will receive confirmation SMS</li>
@@ -229,7 +229,7 @@
                         <li>Choose 3 - Enter business number</li>
                         <li>Enter <b>333444</b></li>
                         <li>Enter reference number (Pay Number) : <strong class="pay_reference"></strong></li>
-                        <li>Enter amount <strong>{{formatCurrency(getCartTotalPrice(),getWorkspaceCurrency($super_settings))}} </strong></li>
+                        <li>Enter amount <strong>{{formatCurrency($order_total,getWorkspaceCurrency($super_settings))}} </strong></li>
                         <li>Enter PIN</li>
                         <li>Confirm Payment</li>
                         <li>You will receive confirmation SMS</li>
@@ -245,7 +245,7 @@
                         <li>Choose 4 - Enter business number</li>
                         <li>Enter <b>839938</b></li>
                         <li>Enter reference number (Pay Number) : <strong class="pay_reference"></strong></li>
-                        <li>Enter amount <strong> {{formatCurrency(getCartTotalPrice(),getWorkspaceCurrency($super_settings))}} </strong></li>
+                        <li>Enter amount <strong> {{formatCurrency($order_total,getWorkspaceCurrency($super_settings))}} </strong></li>
                         <li>Enter PIN</li>
                         <li>Confirm Payment</li>
                         <li>You will receive confirmation SMS</li>

@@ -223,7 +223,7 @@ Route::get("/delete-user/{id}", [AdminController::class, "deleteUser"]);
 Route::get("/users", [AdminController::class, "users"]);
 Route::get("/emails", [AdminController::class, "newsletterEmail"]);
 
-Route::get("/", [AuthController::class, "login"])->name("login");
+// Route::get("/", [AuthController::class, "login"])->name("login");
 Route::get("/login", [AuthController::class, "login"])->name("login");
 
 Route::get("/signup", [AuthController::class, "signup"]);

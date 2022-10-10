@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Blog;
 use App\Models\Course;
 use App\Models\CoursePurchase;
+use App\Models\Payment;
 use App\Models\CreditCard;
 use App\Models\Customer;
 use App\Models\EbookPurchase;
 use App\Models\Order;
 use App\Models\Region;
 use App\Models\OrderItem;
+use App\Services\Notifications\Sms;
 use App\Models\PaymentGateway;
 use App\Models\Product;
 use App\Models\Setting;
@@ -57,6 +60,8 @@ class BillingController extends WebsiteBaseController
 if ($this->student) {
 
     $order_id = $this->orderConfirmed();
+    $order = Order::find($order_id);
+    $order_total = $order->order_total;
     $region = Region::find($this->student->region_id);
     return \view("billing.invoice", [
         "first_name" => $this->student->first_name,
@@ -66,6 +71,7 @@ if ($this->student) {
         "email" => $this->student->email,
         "region" => $region->name,
         "order_id" => $order_id,
+        "order_total" => $order_total,
     ]);
 }else
 {
@@ -264,7 +270,7 @@ if ($this->student) {
             }
         }
 
-     //session()->forget("cart");
+     session()->forget("cart");
 
      return $order->id;
         // return \view("billing.order", [
@@ -399,15 +405,20 @@ if ($this->student) {
     }
     public function orderPaid(Request $request)
     {
-        logger($request);
+        //dd('test');
     
         try {
         $decoded_params = $request->all();
 
         // $decoded_params['body']['result']['referenceNumber'];
+        $receipt_number = $decoded_params['body']['result']['receiptNumber'];
+        $reference_number = $decoded_params['body']['result']['referenceNumber'];
+        $txn_date = $decoded_params['body']['result']['date'];
+        $operator = $decoded_params['body']['result']['operator'];
+
 
         $order_id = $decoded_params['body']['result']['transactionNumber'];
-
+   
         $order = Order::find($order_id);
         $order_items = OrderItem::where("order_id",$order_id)->get();
         foreach($order_items as $order_item){
@@ -417,6 +428,9 @@ if ($this->student) {
                     $course_purchased->course_id = $order_item->item_id;
                     $course_purchased->student_id = $order->student_id;
                     $course_purchased->save();
+                    $phone = '0788330308';
+                    $sms = new Sms($phone, 'Assalam Alleykum Warahamatullah Wabarakatuh. Malipo yamepokelewa risiti namba '.$receipt_number.', kiasi '.$order->order_total.', kozi uliyolipia '.$order_item->item_name.' .Karibu BAKWATA ONLINE ACADEMY');
+                    $response = $sms->send();
 
                  }
                  
@@ -432,58 +446,36 @@ if ($this->student) {
                  }
 
         } 
-        // $amount = getCartTotalPrice();
+        $order->paid = 1;
+        $order->update();
 
- 
-
-
-
-
-                // Set your secret key: remember to change this to your live secret key in production
-                // See your keys here: https://dashboard.stripe.com/account/apikeys
-  
-
-                // Create a Customer:
-               
-        
-                // Add courses to student
-
-                // $cart = $this->cart;
-                // if (!empty($cart["course"])) {
-                //     foreach ($cart["course"] as $course) {
-                //         $course_purchased = new CoursePurchase();
-                //         $course_purchased->course_id = $course->id;
-                //         $course_purchased->student_id = $this->student->id;
-                //         $course_purchased->save();
-                //     }
-                // }
-
-                // Add ebooks to student
-
-                // if (!empty($cart["ebook"])) {
-                //     foreach ($cart["ebook"] as $ebook) {
-                //         $ebook_purchased = new EbookPurchase();
-                //         $ebook_purchased->ebook_id = $ebook->id;
-                //         $ebook_purchased->student_id = $this->student->id;
-                //         $ebook_purchased->save();
-                //     }
-                // }
-                
-                // if (!empty($cart["registration"])) {
-                //     foreach ($cart["registration"] as $registration) {
-                //         $registration_purchased = new RegistrationPurchase();
-                //         $registration_purchased->registration_id = $registration->id;
-                //         $registration_purchased->student_id = $this->student->id;
-                //         $registration_purchased->save();
-                //     }
-
-                //     $student = Student::find($this->student->id);
-                //     $student->registration_paid = 1;
-                //     $student->update();
-
-                // }
+        $payment = new Payment();
+        $payment->receipt_number = $receipt_number;
+        $payment->txn_number = $reference_number;  
+        $payment->txn_date = $txn_date; 
+        $payment->operator = $operator;
+        $payment->order_id = $order_id;
+        $payment->save(); 
 
 
+         
+$student = Student::find($order->student_id); 
+if (is_null($student->number)) {
+    $region = Region::find($student->region_id);
+    $year = Carbon::now()->year;
+    $month = Carbon::now()->month;
+    $number = 'BOA/'.$region->hasc.'/'.$month.'/'.$year.'/'.$student->id;
+    $phone = '0788330308';
+    $sms = new Sms($phone, 'Assalam Alleykum Warahamatullah Wabarakatuh '.strtoupper($request->first_name).' '.strtoupper($request->last_name).' Namba yako ya usajili ni ' .$number.'  Namba hii utaitumia katika kutuma majibu ya mtihani wa moduli zako. Karibu BAKWATA ONLINE ACADEMY');
+    $response = $sms->send();
+    //logger($response);
+    $student = Student::find($student->id);
+    $student->number = $number;
+    $student->update();
+}
+
+              //  return $receipt_number;
+         
                 return response(
                     [
                         "success" => true,

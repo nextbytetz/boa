@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Payment;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -12,14 +13,16 @@ class EarningController extends AdminBaseController
 {
     public function earnings()
     {
-        $orders = Order::all();
+    
+        $payments = Payment::all();
+        $orders = Order::where('paid',1)->get();
         $students = Student::all()
             ->keyBy("id")
             ->all();
-
         return \view("earnings.orders", [
             "selected_navigation" => "earnings",
             "orders" => $orders,
+            "payments" => $payments,
             "students" => $students,
         ]);
     }

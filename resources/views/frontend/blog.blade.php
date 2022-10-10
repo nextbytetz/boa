@@ -6,10 +6,10 @@
             <div class="row">
                 <div class=" ms-3 col-8 mx-auto  mb-5">
 
-                    <h2>{{__('Read the articles of our blog')}} </h2>
-                    <p class="">
+                    <h2>Soma habari mbalimbali hapa </h2>
+                    {{-- <p class="">
                         {{__('Here you can find the latest news about our courses and events')}}
-                    </p>
+                    </p> --}}
                 </div>
             </div>
             <div class="container ms-3 row mb-4">

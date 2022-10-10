@@ -46,6 +46,7 @@ class FrontendController extends WebsiteBaseController
 
     public function home()
     {
+
         $landingpage = LandingPage::first();
 
         $categories = CourseCategory::all()
@@ -69,7 +70,7 @@ class FrontendController extends WebsiteBaseController
             ->get();
         $contact = ContactSection::first();
 
-        if (($this->super_settings["landingpage"] ?? null) === "Default") {
+        // if (($this->super_settings["landingpage"] ?? null) === "Default") {
             return \view("frontend.home", [
                 "landingpage" => $landingpage,
                 "categories" => $categories,
@@ -80,11 +81,11 @@ class FrontendController extends WebsiteBaseController
                 "students" => $students,
                 "contact" => $contact,
             ]);
-        }
+        // }
 
-        return \view("auth.login", [
-            "landingpage" => $landingpage,
-        ]);
+        // return \view("auth.login", [
+        //     "landingpage" => $landingpage,
+        // ]);
     }
 
     public function privacy()

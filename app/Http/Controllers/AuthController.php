@@ -255,16 +255,30 @@ class AuthController extends Controller
     public function studentLoginPost(Request $request)
     {
         $request->validate([
-            "email" => ["required", "email"],
+            "username" => ["required"],
             "password" => ["required"],
         ]);
 
-        $user = Student::where("email", $request->email)->first();
-
-        if (!$user) {
+        $user_by_email = Student::where("email", $request->username)->first();
+        $user_by_phone = Student::where("phone_number", $request->username)->first();
+        
+        
+        // if (!($user_by_email || $user_by_phone)) {
+        //     return back()->withErrors([
+        //         "email" => __("User not found!"),
+        //     ]);
+        // }
+//dd($user_by_phone);
+        if($user_by_email && $user_by_email->count()){
+            $user = $user_by_email;
+        }
+        elseif($user_by_phone && $user_by_phone->count()){
+            $user = $user_by_phone;
+        }
+        else{
             return back()->withErrors([
                 "email" => __("User not found!"),
-            ]);
+            ]); 
         }
 
         if (Hash::check($request->password, $user->password)) {
@@ -338,18 +352,24 @@ class AuthController extends Controller
     public function signupPost(Request $request)
     {
         $request->validate([
-            "email" => ["required", "email"],
+  
             "first_name" => ["required"],
             "last_name" => ["required"],
+            "phone_number" => ["phone_number"],
             "password" => ["required"]
             
         ]);
 
         $check = User::where("email", $request->email)->first();
- 
+        $check_phone = User::where("phone_number", $request->phone_number)->first();
         if ($check) {
             return back()->withErrors([
-                "email" => "User with this email already exist",
+                "email" => "Email imejirudia",
+            ]);
+        }
+        if ($check_phone) {
+            return back()->withErrors([
+                "phone_number" => "Namba ya simu imejirudia",
             ]);
         }
      
@@ -408,7 +428,7 @@ class AuthController extends Controller
 
        // dd($request);
         $request->validate([
-            "email" => ["required", "email"],
+            // "email" => ["required", "email"],
             "first_name" => ["required"],
             "last_name" => ["required"],
             "password" => ["required"],
@@ -417,17 +437,20 @@ class AuthController extends Controller
         ]);
 
 
-
-        $check_mail = Student::where("email", $request->email)->first();
-        $check_phone_number = User::where("phone_number", $request->phone_number)->first();
-        if ($check_mail) {
-            return back()->withErrors([
-                "email" => "This Email already exist",
-            ]);
-        }
+if($request->email){
+    $check_mail = Student::where("email", $request->email)->first();
+    if ($check_mail) {
+        return back()->withErrors([
+            "email" => "Barua pepe imejirudia",
+        ]);
+    }
+}
+       
+        $check_phone_number = Student::where("phone_number", $request->phone_number)->first();
+  
         if ($check_phone_number) {
             return back()->withErrors([
-                "phone_number" => "User with this phone number already exist",
+                "phone_number" => "Namba ya simu imejirudia",
             ]);
         }
         $check_region_id = $request->input("region_id");
@@ -455,17 +478,7 @@ class AuthController extends Controller
        
         $student->save();
 
-     
-        $region = Region::find($request->input("region_id"));
-        $year = Carbon::now()->year;
-        $month = Carbon::now()->month;
-        $number = 'BOA/'.$region->hasc.'/'.$month.'/'.$year.'/'.$student->id;
-        $sms = new Sms($student->phone_number,'Assalam Alleykum Warahamatullah Wabarakatuh '.strtoupper($request->first_name).' '.strtoupper($request->last_name).' hongera sana kwa kukamilisha usajili Namba yako ya usajili ni' .$number.'  Namba hii utaitumia katika kutuma majibu ya mtihani wa moduli zako. KARIBU katika chuo chetu cha BAKWATA ONLINE ACADEMY');
-        $response = $sms->send();
-        logger($response); 
-        $student = Student::find($student->id);
-        $student->number = $number;
-        $student->update();
+    
 
         if (!empty($this->super_settings["smtp_host"])) {
             try {
@@ -493,7 +506,7 @@ class AuthController extends Controller
 
        // return \view("billing.invoice");
 
-        return redirect(config("app.url") . "/student/login");
+        return redirect(config("app.url") . "student/login");
     }
 
     public function logout(Request $request)

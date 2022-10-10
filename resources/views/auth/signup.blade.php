@@ -30,10 +30,13 @@
                 <div class="mt-5">
                     <div class="card-header text-start pt-4">
                         <h4>{{__('Create Your Account')}}</h4>
-                        <p class=" mt-3 mb-0">{{__('Already have an account?')}} <a href="/student/login"
-                                                                                    class="text-info-light font-weight-bolder">{{__('Sign in')}}</a>
-                    </div>
-
+                        <p class=" mt-3 mb-0">{{__('Already have an account?')}} <a href="student/login"
+                                                                                    class="text-info-light font-weight-bolder">{{__('Sign in')}} hapa</a>
+                   au
+                                                                                    <a href="/home"
+                                                                                    class="text-info-light font-weight-bolder">Rudi Mwanzo</a>
+                                                                                                                                             </div>
+                 
                     <div class="card-body">
                         <form role="form text-left" method="post" action="/student-signup-post">
                             @if (session()->has('status'))
@@ -70,7 +73,7 @@
 
                             <div class="row">
                                 <div class="col-6">
-                                    <label class="form-label">{{__('Your Email')}}</label><span class="text-danger">*</span>
+                                    <label class="form-label">{{__('Your Email')}}</label>
                                     <div class="input-group">
                                         <input type="email" placeholder="Email" name="email" class="form-control"
                                        aria-label="Email" aria-describedby="email-addon">
@@ -138,8 +141,9 @@
                             @csrf
                             <div class="text-start">
                                 <button type="submit" class="btn btn-blue btn-rounded  my-4 mb-2">{{__('Sign up')}}</button>
+                                <br>
+                        
                             </div>
-
                             </p>
                         </form>
                     </div>

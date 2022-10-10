@@ -66,9 +66,9 @@
                                             </ul>
                                         </div>
                                     @endif
-                                    <label>{{__('Your Email')}}</label>
+                                    <label>{{__('Your Email')}} au {{__('Phone Number')}}</label>
                                     <div class="mb-3">
-                                        <input type="email" name="email" class="form-control" placeholder="Email"
+                                        <input type="text" name="username" class="form-control" placeholder="Barua Pepe au Namba ya simu"
                                                aria-label="Email" aria-describedby="email-addon">
                                     </div>
                                     <div>

@@ -57,7 +57,7 @@
 
                 <li class="nav-item   ms-lg-auto mx-2">
                     <a class=" fw-bolder ps-2 d-flex justify-content-between cursor-pointer align-items-center me-2" href="/course" >
-                        {{__('Courses')}}
+                        {{__('Courses')}} zetu
 
                     </a>
                 </li>
@@ -76,7 +76,7 @@
                 <li class="nav-item  ms-lg-auto mx-2">
                     <a class=" fw-bolder ps-2 d-flex justify-content-between cursor-pointer align-items-center me-5" href="/student/login" target="_blank">
 
-                        {{__('Login')}}
+                        {{__('Login')}} kwenye akaunti
 
                     </a>
                 </li>

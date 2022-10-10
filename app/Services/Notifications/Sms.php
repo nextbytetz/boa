@@ -39,7 +39,7 @@ class Sms
     public function __construct($phone, $message)
     {
    
-        $this->sender = "NEXTSMS";
+        $this->sender = "BAKWATA";
        $this->key = "Basic TUFMSUJBVEU6TmV4dHNtc0AyMDIw";
        // $this->key = "Basic TUFMSUJBVEU6TmV4dHNtc0AyMD";
         $this->message = $message;        

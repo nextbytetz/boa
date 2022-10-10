@@ -106,7 +106,7 @@ return [
     'prohibited_unless'    => 'Ya :attribute uwanja ni marufuku isipokuwa :other ni katika :values.',
     'prohibits'            => 'The :attribute field prohibits :other from being present.',
     'regex'                => 'Muundo wa kipengele si halali.',
-    'required'             => 'Sehemu ya kipengele inahitajika.',
+    'required'             => 'Jaza sehemu zote zenye alama ya *',
     'required_array_keys'  => 'The :attribute field must contain entries for: :values.',
     'required_if'          => 'Sehemu ya kipengele inahitajika wakati :other ni :value.',
     'required_unless'      => 'Sehemu ya kipengele inahitajika isipokuwa :other ni katika :values.',

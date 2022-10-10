@@ -240,11 +240,11 @@
 
                                 <!-- Button -->
                                 <div class="d-grid">
-                                    <a href="/checkout" class="btn btn-lg btn-success">{{__('Checkout')}}</a>
+                                    <a href="/checkout" class="btn btn-lg btn-success">FANYA MALIPO</a>
                                 </div>
 
                                 <!-- Content -->
-                                <p class="small mb-0 mt-2 text-center">{{__('By purchasing, you agree to these')}} </p><p class="text-center"><a href="/termsandconditions"><strong>{{__('Terms of Service')}}</strong></a></p>
+                                {{-- <p class="small mb-0 mt-2 text-center">{{__('By purchasing, you agree to these')}} </p><p class="text-center"><a href="/termsandconditions"><strong>{{__('Terms of Service')}}</strong></a></p> --}}
 
                             </div>
                             <!-- Card total END -->
