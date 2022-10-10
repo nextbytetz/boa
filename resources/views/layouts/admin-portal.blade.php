@@ -191,7 +191,7 @@
             {{-- <li class="nav-item mt-3 mb-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-muted text-xs opacity-6">{{__('CMS')}}</h6>
             </li>--}}
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'themes') active @endif "
                    href="/themes">
 
