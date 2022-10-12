@@ -116,7 +116,7 @@
                             <!-- Recently Viewed START -->
                             <div class="card card-body shadow  mb-4">
                                 <!-- Title -->
-                                <h6 class="mb-3">{{__('All Lessons of the course')}}</h6>
+                                <h6 class="mb-3">Masomo ya kozi hii</h6>
                                 <!-- Course item START -->
                                 <div class="row gx-3 mb-3">
 

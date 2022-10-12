@@ -31,7 +31,7 @@
             </section>
 
             <div class=" mt-4">
-                <div class="position-relative mb-3">
+                {{-- <div class="position-relative mb-3">
 
                     @if(empty($lesson->video))
                         <img src="{{PUBLIC_DIR}}/img/placeholder.jpeg"
@@ -57,7 +57,7 @@
                         </div>
 
                     @endif
-                </div>
+                </div> --}}
 
                 <div class="card shadow rounded-2 p-0 mb-5">
                     <!-- Tabs START -->
@@ -118,7 +118,7 @@
                                 </a>
                         @endif
                             <!-- Title -->
-                            <h6 class="mb-3">{{__('All Lessons of the course')}}</h6>
+                            <h6 class="mb-3">Masomo ya kozi hii</h6>
                             <!-- Course item START -->
                             <div class="row gx-3 mb-3">
                                 <div class="card-body">
