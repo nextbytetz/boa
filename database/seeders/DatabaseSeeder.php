@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
   
         $this->call([
             RegionsTableSeeder::class,
+            DistrictsTableSeeder::class,
           
         ]);
         $workspace = new Workspace();
