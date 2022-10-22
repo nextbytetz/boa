@@ -506,7 +506,7 @@ if($request->email){
 
        // return \view("billing.invoice");
 
-        return redirect(config("app.url") . "student/login");
+        return redirect(config("app.url") . "/student/login");
     }
 
     public function logout(Request $request)
