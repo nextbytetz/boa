@@ -405,11 +405,11 @@ if ($this->student) {
     }
     public function orderPaid(Request $request)
     {
-        //dd('test');
+        
     
         try {
         $decoded_params = $request->all();
-
+        logger($decoded_params);
         // $decoded_params['body']['result']['referenceNumber'];
         $receipt_number = $decoded_params['body']['result']['receiptNumber'];
         $reference_number = $decoded_params['body']['result']['referenceNumber'];
